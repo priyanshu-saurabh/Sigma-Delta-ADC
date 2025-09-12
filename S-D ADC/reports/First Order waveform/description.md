@@ -13,4 +13,4 @@ The output demonstrates correct pulse-density modulation behavior.
 Zoomed-in view of the Sigma-Delta ADC output waveform.  
 This provides a closer look at the bitstream transitions and how the modulator encodes the input signal in finer detail.
 
-![Figure 2](docs/figure2_zoomed.png)
+![Figure 2](https://github.com/priyanshu-saurabh/Sigma-Delta-ADC/blob/main/S-D%20ADC/reports/First%20Order%20waveform/%20Fig%202.png)
