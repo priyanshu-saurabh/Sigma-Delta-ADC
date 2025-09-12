@@ -12,7 +12,7 @@ The time constant is set to a **high value**, causing the output to integrate th
 Same input pulse signal, but with the time constant set to a **very high value**.  
 This results in an even slower integration response compared to Figure 1.
 
-![Figure 2](S-D ADC/reports/Integrator (OTA-C)/Figure 2.png)
+![Figure 2](https://github.com/priyanshu-saurabh/Sigma-Delta-ADC/blob/main/S-D%20ADC/reports/Integrator%20(OTA-C)/Figure%202.png)
 
 
 
