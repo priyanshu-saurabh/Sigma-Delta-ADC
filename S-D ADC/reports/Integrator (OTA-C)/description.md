@@ -4,7 +4,7 @@
 The output of the OTA-C integrator when the input is a **pulse signal**.  
 The time constant is set to a **high value**, causing the output to integrate the input slowly.
 
-![Figure 1](docs/integrator_high_tc.png)
+![Figure 1](https://github.com/priyanshu-saurabh/Sigma-Delta-ADC/blob/main/S-D%20ADC/reports/Integrator%20(OTA-C)/Figure%201.png)
 
 
 
