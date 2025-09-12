@@ -20,4 +20,4 @@ This results in an even slower integration response compared to Figure 1.
 The input is a **sine wave**, and the time constant is set to a **moderate value** (neither high nor low).  
 The output resembles a **cosine wave**, as expected from an integration operation.
 
-![Figure 3](docs/integrator_sine_input.png)
+![Figure 3](https://github.com/priyanshu-saurabh/Sigma-Delta-ADC/blob/main/S-D%20ADC/reports/Integrator%20(OTA-C)/Figure%203.png)
