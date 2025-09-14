@@ -35,4 +35,4 @@ The plots demonstrate the OTA’s transconductance behavior by showing the relat
 - Ensure simulation covers the full input swing expected in the SDM ADC loop.  
 
 ---
-![Figure 2: OTA V–I Characteristics](ota_vi.png)
+![Figure 2: OTA V–I Characteristics](https://github.com/priyanshu-saurabh/Sigma-Delta-ADC/blob/main/S-D%20ADC/reports/Operational%20Transconductance%20Amplifier%20(OTA)/V-I%20graph/Figure%202.png)
