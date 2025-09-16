@@ -1,2 +1,1 @@
-# Project - 1
-Sigma-Delta Modulator for High-Resolution ADC
+# Low-Power ΣΔ ADC for Precision Signal Acquisition in 90 nm CMOS
