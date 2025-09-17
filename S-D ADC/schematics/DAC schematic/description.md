@@ -10,9 +10,9 @@ The DAC converts the digital decision from the StrongARM Comparator into an anal
 **Pins Description:**
 - **Vdd** – Positive supply voltage  
 - **Vss** – Ground / negative supply  
-- **Vref** – Reference voltage input  
-- **Din+** – Positive digital input (from comparator)  
-- **Din-** – Negative digital input (from comparator)  
+- **-Vref** – Reference voltage input (negative)  
+- **+Vref** – Reference voltage input (positive)
+- **Vin+** –  Digital input (from comparator)  
 - **Vout** – Analog feedback output  
 
 ---
