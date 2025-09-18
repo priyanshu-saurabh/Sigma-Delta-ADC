@@ -1,0 +1,9 @@
+"?? Ideal Performance Table -------1st-order ??, OSR = 64",,,,,,
+,,,,,,
+Case,Input type,Input amplitude,Ideal SNR before filtering (raw bitstream),Ideal SNR after filtering (in-band),Expected SNDR,Notes
+Full-scale sine,Single-tone,~0.9 Vpeak (near FS),"Very low (~0–6 dB, because noise dominates full Nyquist band)",~57 dB,45–55 dB (distortion-limited),Filtering is essential to see theoretical gain
+Moderate sine (~–6 dBFS),Single-tone,~0.45 Vpeak (~50% FS),~0–6 dB,~51 dB,?51 dB,Best compromise between amplitude and linearity
+Small sine (~–20 dBFS),Single-tone,~0.09 Vpeak (~10% FS),~0 dB,~37 dB,?37 dB,SNR scales with amplitude²
+Tiny sine (~–40 dBFS),Single-tone,~9 mVpeak (~1% FS),~0 dB,~17 dB,?17 dB,Signal barely above quantization noise
+DC input,N/A,0,N/A,N/A,N/A,"Only quantization noise, no SNR definition"
+"Real-world input (voice/music, broadband)",Multi-tone,Typical –6 to –20 dBFS,~0 dB (noise covers wideband),~30–50 dB (depends on input level),? same as SNR (distortion negligible),Perceived SNR lower than sine-test cas
