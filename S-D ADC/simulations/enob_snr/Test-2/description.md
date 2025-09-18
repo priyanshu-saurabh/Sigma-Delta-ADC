@@ -17,7 +17,7 @@ This document summarizes the measured Signal-to-Noise Ratio (SNR) for different 
 ---
 
 ## Figure 2 — SNR ≈ 18 dB (Small-Signal Input, 30 mV)
-
+![Figure 2](https://github.com/priyanshu-saurabh/Sigma-Delta-ADC/blob/main/S-D%20ADC/simulations/enob_snr/Test-2/Figure%202%20A.png)
 - **Input type**: Single-tone sine wave  
 - **Amplitude**: ~30 mV (~much smaller than full-scale)  
 - **Measured SNR**: ~18 dB  
