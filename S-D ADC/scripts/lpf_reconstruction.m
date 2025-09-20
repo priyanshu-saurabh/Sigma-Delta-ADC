@@ -12,32 +12,30 @@ N = length(voltage);
 dt = mean(diff(time));
 fs = 1/dt;
 
-% design lowpass FIR
+
 nyq = fs/2;
 Wn = CUTOFF_HZ / nyq;
 b = fir1(NUMTAPS-1, Wn);  % NUMTAPS-1 because fir1 length = order+1
 
-% filter
 filtered = filter(b, 1, voltage);
 
-% compensate group delay
+
 delay = floor((length(b)-1)/2);
 filtered_shifted = circshift(filtered, -delay);
 % trim tail introduced by shift
 filtered_shifted(end-delay+1:end) = [];
 time_trim = time(1:length(filtered_shifted));
 
-% decimate
+
 down = filtered_shifted(1:DECIM:end);
 time_down = time_trim(1:DECIM:end);
 fs_down = fs / DECIM;
 
-% save reconstructed CSV
 out_file = erase(CSV_FILE, ".csv") + "_reconstructed.csv";
 T_out = [time_down, down];
 writematrix(T_out, out_file);
 
-% Plot small window
+
 figure;
 plot(time_down(1:min(2000,length(time_down))), down(1:min(2000,length(down))));
 xlabel('Time (s)'); ylabel('Voltage');
