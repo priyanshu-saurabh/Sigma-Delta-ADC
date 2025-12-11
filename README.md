@@ -1,7 +1,7 @@
 # Low-Power ΣΔ ADC for Precision Signal Acquisition in 90 nm CMOS
 
 <p align="center">
-  <img src="images/layout.png" alt="Sigma-Delta ADC Layout" width="80%">
+  <img src="https://github.com/priyanshu-saurabh/Sigma-Delta-ADC/blob/main/S-D%20ADC/layouts/main/sdm-adc-layout.png" alt="Sigma-Delta ADC Layout" width="80%">
 </p>
 ---
 First-Order Sigma-Delta ADC (Full-Custom Design)
