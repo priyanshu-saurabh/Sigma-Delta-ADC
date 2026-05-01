@@ -1,4 +1,4 @@
-# Low-Power ΣΔ ADC for Precision Signal Acquisition in 90 nm CMOS
+# High-Resolution Continuous-Time ΣΔ Modulator with OTA-C Integrator and StrongARM Comparator
 
 <p align="center">
   <img src="https://github.com/priyanshu-saurabh/Sigma-Delta-ADC/blob/main/S-D%20ADC/layouts/main/sdm-adc-layout.png" alt="Sigma-Delta ADC Layout" width="80%">
