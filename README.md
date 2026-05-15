@@ -6,142 +6,20 @@
 ---
 First-Order Sigma-Delta ADC (Full-Custom Design)
 
-This repository documents the design, verification, and layout of a first-order Sigma-Delta Modulator (ΣΔM) ADC in Cadence Virtuoso. The project was completed from scratch, including OTA, integrator, 1-bit DAC, dynamic comparator, system-level integration, FFT analysis, and layout verification.
+This project involved the design and implementation of a first-order continuous-time Sigma-Delta (ΣΔ) ADC using Cadence Virtuoso. The complete system included an OTA, OTA-C integrator, dynamic comparator acting as a 1-bit quantizer, and a 1-bit feedback DAC. The ADC was tested using both sine-wave inputs for SNR and ENOB evaluation, and a real voice signal converted into a PWL source. The output was a 1-bit pulse density modulated (PDM) stream, which was analyzed through FFT, SNR/ENOB calculations, and signal reconstruction.
 
-🔹 Project Overview
+The work covered complete schematic design, system-level simulation, layout implementation, and post-layout verification. Several practical mixed-signal design challenges were encountered during development. Initially, mismatched reference levels between the OTA, comparator, and DAC caused the integrator output to drift far beyond the supply range. This was resolved by establishing a consistent common-mode reference and properly aligning the comparator threshold and DAC polarity, which stabilized the loop operation within the 0–1.8 V supply range. Integrator instability caused by improper RC selection and biasing was corrected by tuning the resistor, capacitor, and bias current values so that the integrator pole remained within the OTA bandwidth.
 
-Architecture: First-order continuous-time ΣΔ ADC
+Comparator threshold alignment was another critical issue, as incorrect thresholds caused the quantizer output to remain stuck at logic 0 or logic 1. Using a latch comparator and matching the threshold to the system common-mode enabled reliable pulse-density modulation. Oversampling and clock configuration also required optimization because early simulations lacked proper noise shaping due to insufficient oversampling. By selecting an OSR of at least 64, clear quantization noise shaping became visible in FFT analysis. Input and DAC scaling were also carefully adjusted to avoid loop saturation while still utilizing the available dynamic range effectively.
 
-Blocks Implemented:
+FFT analysis initially produced misleading results because most signal power appeared in the DC bin, resulting in poor measured SNR. This was corrected by using coherent sine-wave inputs and proper windowing functions such as Hann or Hamming windows. Post-layout simulations introduced additional issues related to parasitic effects and component mismatch. These were minimized through common-centroid layout techniques, guard rings, substrate contacts, and wide supply rails, resulting in DRC/LVS-clean layouts with post-layout behavior closely matching schematic simulations.
 
-OTA (Operational Transconductance Amplifier)
+Performance results included:
 
-OTA-C Integrator
+• SNDR ≈ 51.4 dB and ENOB ≈ 8.2 bits for a 2 kHz sine-wave input at OSR = 64
+• SNR ≈ 32 dB and ENOB ≈ 5.1 bits for the recorded voice input
+• Clear quantization noise shaping observed in FFT analysis
+• Successful basic reconstruction of the original voice signal using averaging filters
 
-Dynamic comparator (1-bit quantizer)
+This project provided practical experience in mixed-signal system integration, analog debugging, FFT-based performance evaluation, and layout-aware circuit design. It demonstrated how sensitive Sigma-Delta systems are to biasing, reference alignment, integrator tuning, and layout parasitics, reinforcing the importance of both circuit-level understanding and careful physical implementation in analog and mixed-signal IC design.
 
-1-bit feedback DAC
-
-Input Stimuli:
-
-Sine waves (for SNR/ENOB testing)
-
-PWL file generated from my recorded voice (“Hi”, ~1.2 s duration)
-
-Output:
-
-1-bit Pulse Density Modulated (PDM) stream
-
-Verified through FFT, SNR/ENOB, and reconstruction
-
-🔹 Key Features
-
-Complete schematic design of all building blocks.
-
-System-level simulation using both sine and real audio inputs.
-
-FFT-based performance analysis (SNR, ENOB, quantization noise shaping).
-
-Layout implementation with DRC/LVS verification.
-
-Documentation of debugging challenges and practical solutions.
-
-🔹 Challenges & Solutions
-1. Reference Level Mismatch Between Blocks
-
-Problem: OTA, comparator, and DAC worked on different reference levels → integrator output drifted unrealistically (0–50 V).
-
-Solution: Unified references with a consistent common-mode (Vcm). Adjusted comparator threshold and DAC polarity to match.
-
-Impact: Loop stabilized, integrator output confined within supply range (0–1.8 V).
-
-2. OTA-C Integrator Stability
-
-Problem: Wrong RC or bias caused integrator to either saturate or barely respond.
-
-Solution: Bias current = ----, R = 100kΩ, C = 1pF → pole at ~1.6 MHz, within OTA GBW.
-
-Impact: Achieved correct (sine-->cosine or pulse--->sawtooth-like) integration, enabling proper ΣΔ loop operation.
-
-3. Comparator Threshold & Offset
-
-Problem: Comparator stuck at constant output (all 0’s or all 1’s).
-
-Solution: Aligned comparator threshold to integrator’s common-mode (0 V for bipolar, 0.9 V for unipolar feedback). Used latch comparator for sharp decisions.
-
-Impact: Reliable quantization, correct pulse-density variation.
-
-4. Oversampling Ratio (OSR) & Clock Selection
-
-Problem: Early simulations had fclk ≈ fin, so no oversampling/noise shaping.
-
-Solution: Chose OSR ≥ 64 (e.g., fin = 2 kHz, fclk ≈ 128 kHz).
-
-Impact: Clear quantization noise shaping observed in FFT.
-
-5. Input vs DAC Scaling
-
-Problem: Small Vin → density barely changed; large Vin → loop saturated.
-
-Solution: Set Vin amplitude ≈ 50–80% of Vref (e.g., 9m – 50m V for Vref = 20-50u V).
-
-Impact: Proper dynamic range utilization; output density varied with input amplitude.
-
-6. FFT Analysis Confusion
-
-Problem: First FFT runs showed signal power in DC bin → SNR ~8 dB, looked wrong.
-
-Solution: Used coherent sine input + Hann window or hamming. Isolated fundamental tone in FFT.
-
-Impact: Realistic SNR values measured.
-
-7. Layout Parasitics & Matching
-
-Problem: Extracted simulations showed pole shifts & offset due to parasitics/mismatch.
-
-Solution: Common-centroid layout for capacitors and resistors, guard rings, substrate contacts, wide supply rails.
-
-Impact: DRC/LVS clean, post-layout sims matched schematic-level behavior.
-
-🔹 Performance Results
-
-Sine Input (2 kHz, OSR = 64):
-
-Quantizer CLOCK Period = 3.90625u s
-
-Quantizer CLOCK Pulse Width = 1.953125u s
-
-Fall/Rise time = 1n s
-
-SNDR ≈ 51.4 dB (without DSP filtering)
-
-ENOB ≈ 8.2 bits
-
-Voice Input (PWL “Hi”, ~1.2 s):
-
-SNR ≈ 32 dB (raw PDM stream, pre-DSP filtering)
-
-ENOB ≈ 5.1 bits
-
-FFT Analysis: Clear signal tone with shaped quantization noise slope.
-
-Reconstruction: Basic averaging filter showed resemblance to original input.
-
-🔹 Layout Results
-
-All building blocks placed and routed in Cadence Virtuoso.
-
-DRC/LVS clean.
-
-Layout techniques:
-
-Common-centroid capacitor matching
-
-Guard rings & substrate contacts for isolation
-
-Wide metal rails for power stability
-
-🔹 Lessons Learned
-
-Working on this project made me realize that analog debugging is as much about intuition as it is about running simulations. No tool can magically fix problems like reference mismatches or wrong biasing.
-those have to be understood at the circuit level. I also learned how sensitive a Sigma Delta loop is to details: things like integrator tuning or comparator threshold alignment can make or break the system. And even if the schematic looks perfect, layout parasitics and mismatches can completely change the behavior unless you use careful matching and isolation. In the end, this “simple” first-order Sigma-Delta ADC showed me just how deep and challenging mixed-signal design really is.
